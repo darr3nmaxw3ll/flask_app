@@ -17,6 +17,7 @@
 # use render templates to return an entire html page
 from flask import Flask, render_template, request
 import weather
+import os
 app = Flask(__name__)
 
 @app.route("/") # this tells flask/python the location of your web pages
@@ -32,4 +33,6 @@ def about():
     return render_template('about.html')
 
 if __name__ == "__main__":
-    app.run()
+	port = int(os.environ.get("PORT", 5000)) # this is for when you're uploading the web app to Heroku
+	app.run(host="0.0.0.0", port=port)
+ #  app.run() # normally you could just run this as viewed in this line if you're not uploading to i.e. Heroku
